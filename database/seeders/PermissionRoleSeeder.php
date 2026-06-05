@@ -17,13 +17,13 @@ class PermissionRoleSeeder extends Seeder
         Model::unguard();
         Artisan::call('cache:clear');
 
-        // Create Super Admin User
+        // Create Super Admin User — password is overwritten by InstallerController after seeding
         $superAdmin = User::firstOrCreate(
             ['email' => 'superadmin@example.com'],
             [
                 'name' => 'Super Admin',
                 'email_verified_at' => now(),
-                'password' => Hash::make('1234'),
+                'password' => Hash::make(\Illuminate\Support\Str::random(32)),
                 'type' => 'superadmin',
                 'lang' => 'en',
                 'total_user' => -1,
@@ -33,13 +33,13 @@ class PermissionRoleSeeder extends Seeder
         );
 
 
-        // Create Company User
+        // Create Company User — password is overwritten by InstallerController after seeding
         $company = User::firstOrCreate(
             ['email' => 'company@example.com'],
             [
                 'name' => 'Company',
                 'email_verified_at' => now(),
-                'password' => Hash::make('1234'),
+                'password' => Hash::make(\Illuminate\Support\Str::random(32)),
                 'mobile_no' => '1234567890',
                 'type' => 'company',
                 'lang' => 'en',

@@ -116,6 +116,21 @@ class InstallerController extends Controller
 
             Artisan::call('db:seed', ['--force' => true]);
 
+            // Generate strong random passwords and replace the seeder defaults
+            $adminPassword = \Illuminate\Support\Str::password(16);
+            $companyPassword = \Illuminate\Support\Str::password(16);
+
+            User::where('email', 'superadmin@example.com')
+                ->update(['password' => Hash::make($adminPassword)]);
+            User::where('email', 'company@example.com')
+                ->update(['password' => Hash::make($companyPassword)]);
+
+            // Store credentials temporarily so the final step can display them once
+            File::put(storage_path('install_credentials.json'), json_encode([
+                'admin'   => ['email' => 'superadmin@example.com', 'password' => $adminPassword],
+                'company' => ['email' => 'company@example.com',    'password' => $companyPassword],
+            ]));
+
             $modules = $this->getAllAvailableModules();
             foreach ($modules as $module) {
                 $this->enableModule($module['name']);
@@ -167,16 +182,17 @@ class InstallerController extends Controller
     {
         $this->createInstalledFile();
 
-        $credentials = [
-            'admin' => [
-                'email' => 'superadmin@example.com',
-                'password' => '1234'
-            ],
-            'company' => [
-                'email' => 'company@example.com',
-                'password' => '1234'
-            ]
-        ];
+        $credentialsPath = storage_path('install_credentials.json');
+        if (File::exists($credentialsPath)) {
+            $credentials = json_decode(File::get($credentialsPath), true);
+            File::delete($credentialsPath);
+        } else {
+            // Credentials already shown; show placeholder so the page renders
+            $credentials = [
+                'admin'   => ['email' => 'superadmin@example.com', 'password' => '(already displayed)'],
+                'company' => ['email' => 'company@example.com',    'password' => '(already displayed)'],
+            ];
+        }
 
         return Inertia::render('Installer/Final', compact('credentials'));
     }
