@@ -84,7 +84,7 @@ export default function AuthSimpleLayout({
                                         className="w-auto mx-auto"
                                     />
                                 ) : (
-                                    <ApplicationLogo className="h-8 w-8 mx-auto text-primary" />
+                                    <img src="/images/sahelhub-logo.svg" alt="SahelHub" className="h-14 w-auto mx-auto" />
                                 )}
                             </Link>
                         </div>

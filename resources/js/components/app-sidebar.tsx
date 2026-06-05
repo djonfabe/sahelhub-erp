@@ -67,9 +67,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         className="w-auto max-w-[180px] transition-all duration-200"
                       />
                     ) : (
-                      <div className="h-12 text-inherit font-semibold flex items-center text-lg tracking-tight">
-                        {settings.titleText || 'WorkDo'}
-                      </div>
+                      <img src="/images/sahelhub-logo.svg" alt="SahelHub" className="h-10 w-auto" />
                     );
                   })()}
                 </div>
@@ -87,9 +85,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         className="h-8 w-8 transition-all duration-200"
                       />
                     ) : (
-                      <div className="h-8 w-8 bg-primary text-white rounded flex items-center justify-center font-bold shadow-sm">
-                        W
-                      </div>
+                      <img src="/images/sahelhub-logo.svg" alt="SahelHub" className="h-8 w-8 object-contain" />
                     );
                   })()}
                 </div>
