@@ -191,17 +191,16 @@ class StripeController extends Controller
         try {
             $stripe = new StripeClient(!empty($admin_settings['stripe_secret']) ? $admin_settings['stripe_secret'] : '');
             $stripe_session = Session::get('stripe_session');
+            $receipt_url = '';
             if ($stripe_session && isset($stripe_session->payment_intent)) {
-                $paymentIntents = $stripe->paymentIntents->retrieve(
-                    $stripe_session->payment_intent,
-                    []
-                );
-                $receipt_url = $paymentIntents->charges->data[0]->receipt_url;
-            } else {
-                $receipt_url = "";
+                $paymentIntents = $stripe->paymentIntents->retrieve($stripe_session->payment_intent, []);
+                if (!empty($paymentIntents->latest_charge)) {
+                    $charge = $stripe->charges->retrieve($paymentIntents->latest_charge, []);
+                    $receipt_url = $charge->receipt_url ?? '';
+                }
             }
         } catch (\Exception $exception) {
-            $receipt_url = "";
+            $receipt_url = '';
         }
         Session::forget('stripe_session');
         try {
@@ -251,10 +250,10 @@ class StripeController extends Controller
             $params['admin_settings']['stripe_secret'] ??
             ($params['company_settings'] ? company_setting('stripe_secret', $params['user_id'] ?? null) : null) ??
             '';
-        \Stripe\Stripe::setApiKey($api_key);
 
-        // Build session data
-        $session_data = [
+        $stripe = new StripeClient($api_key);
+
+        return $stripe->checkout->sessions->create([
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
@@ -271,9 +270,7 @@ class StripeController extends Controller
             'metadata' => $params['metadata'],
             'success_url' => $params['success_url'],
             'cancel_url' => $params['cancel_url'],
-        ];
-
-        return \Stripe\Checkout\Session::create($session_data);
+        ]);
     }
 
     public function bookingPayWithStripe(Request $request)
