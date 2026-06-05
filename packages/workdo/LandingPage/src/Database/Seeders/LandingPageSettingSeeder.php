@@ -232,8 +232,8 @@ class LandingPageSettingSeeder extends Seeder
     private function getDefaultColors(): array
     {
         return [
-            'primary' => '#10b77f',
-            'secondary' => '#059669',
+            'primary' => '#13443B',
+            'secondary' => '#E0762A',
             'accent' => '#065f46'
         ];
     }

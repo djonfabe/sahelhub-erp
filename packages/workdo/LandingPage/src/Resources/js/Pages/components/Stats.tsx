@@ -50,7 +50,7 @@ export default function Stats({ settings }: StatsProps) {
     const variant = sectionData.variant || 'stats1';
     const config = STATS_VARIANTS[variant as keyof typeof STATS_VARIANTS] || STATS_VARIANTS.stats1;
     
-    const colors = settings?.config_sections?.colors || { primary: '#10b77f', secondary: '#059669', accent: '#f59e0b' };
+    const colors = settings?.config_sections?.colors || { primary: '#13443B', secondary: '#E0762A', accent: '#F4B23E' };
     
     const defaultStats = [
         { label: 'Businesses Trust Us', value: '20,000+' },

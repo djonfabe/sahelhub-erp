@@ -48,8 +48,8 @@ export function BrandProvider({ children }: { children: ReactNode }) {
     sidebarStyle: globalSettings?.sidebarStyle || 'plain',
     layoutDirection: globalSettings?.layoutDirection || 'ltr',
     themeMode: globalSettings?.themeMode || 'light',
-    themeColor: globalSettings?.themeColor || 'green',
-    customColor: globalSettings?.customColor || '#10b77f',
+    themeColor: globalSettings?.themeColor || 'custom',
+    customColor: globalSettings?.customColor || '#13443B',
   };
 
   const getPreviewUrl = (path: string) => {

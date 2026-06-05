@@ -59,7 +59,7 @@ export default function CTA({ settings }: CTAProps) {
     const subtitle = sectionData.subtitle || 'Join thousands of businesses already using SahelHub to streamline their operations.';
     const primaryButton = sectionData.primary_button || 'Start Free Trial';
     const secondaryButton = sectionData.secondary_button || 'Contact Sales';
-    const colors = settings?.config_sections?.colors || { primary: '#10b77f', secondary: '#059669', accent: '#f59e0b' };
+    const colors = settings?.config_sections?.colors || { primary: '#13443B', secondary: '#E0762A', accent: '#F4B23E' };
 
     const getBackgroundStyle = () => {
         if (config.layout === 'centered') {

@@ -67,7 +67,7 @@ export default function Hero({ settings }: HeroProps) {
     const secondaryButtonLink = sectionData.secondary_button_link || route('login');
     const highlightText = sectionData.highlight_text;
     const heroImage = sectionData.image;
-    const colors = settings?.config_sections?.colors || { primary: '#10b77f', secondary: '#059669', accent: '#f59e0b' };
+    const colors = settings?.config_sections?.colors || { primary: '#13443B', secondary: '#E0762A', accent: '#F4B23E' };
 
     const renderTitle = () => {
         if (highlightText && title?.includes(highlightText)) {

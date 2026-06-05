@@ -55,7 +55,7 @@ export default function Features({ settings }: FeaturesProps) {
     
     const title = sectionData.title || 'Powerful Features';
     const subtitle = sectionData.subtitle || 'Everything your business needs in one integrated platform';
-    const colors = settings?.config_sections?.colors || { primary: '#10b77f', secondary: '#059669', accent: '#f59e0b' };
+    const colors = settings?.config_sections?.colors || { primary: '#13443B', secondary: '#E0762A', accent: '#F4B23E' };
     const [currentSlide, setCurrentSlide] = useState(0);
     
     const defaultFeatures = [

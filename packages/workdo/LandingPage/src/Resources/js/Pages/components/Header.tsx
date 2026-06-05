@@ -65,7 +65,7 @@ export default function Header({ settings }: HeaderProps) {
     const companyName = sectionData.company_name || settings?.company_name || 'SahelHub';
     const isAuthenticated = settings?.is_authenticated;
     const ctaText = isAuthenticated ? 'Dashboard' : (sectionData.cta_text || 'Get Started');
-    const colors = settings?.config_sections?.colors || { primary: '#10b77f', secondary: '#059669', accent: '#f59e0b' };
+    const colors = settings?.config_sections?.colors || { primary: '#13443B', secondary: '#E0762A', accent: '#F4B23E' };
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     
     const themeMode = getAdminSetting('theme_mode') || 'light';

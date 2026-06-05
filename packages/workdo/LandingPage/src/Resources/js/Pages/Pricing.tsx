@@ -51,7 +51,7 @@ export default function Pricing(props: PricingProps) {
     const activeModules = props.activeModules || [];
     const settings = { ...props.settings, is_authenticated: (auth?.user?.id !== undefined && auth?.user?.id !== null) };
     const filters = props.filters || {};
-    const colors = settings?.config_sections?.colors || { primary: '#10b77f', secondary: '#059669', accent: '#f59e0b' };
+    const colors = settings?.config_sections?.colors || { primary: '#13443B', secondary: '#E0762A', accent: '#F4B23E' };
     const pricingSettings = settings?.config_sections?.sections?.pricing || {};
     
     const [priceType, setPriceType] = useState(pricingSettings.default_price_type || 'monthly');

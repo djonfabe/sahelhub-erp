@@ -52,7 +52,7 @@ export default function Gallery({ settings }: GalleryProps) {
     
     const title = sectionData.title || 'Gallery';
     const subtitle = sectionData.subtitle || 'Explore our product in action';
-    const colors = settings?.config_sections?.colors || { primary: '#10b77f', secondary: '#059669', accent: '#f59e0b' };
+    const colors = settings?.config_sections?.colors || { primary: '#13443B', secondary: '#E0762A', accent: '#F4B23E' };
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [lightboxOpen, setLightboxOpen] = useState(false);
     

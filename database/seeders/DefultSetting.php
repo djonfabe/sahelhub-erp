@@ -31,8 +31,8 @@ class DefultSetting extends Seeder
             'sidebarStyle' => 'plain',
             'layoutDirection' => 'ltr',
             'themeMode' => 'light',
-            'themeColor' => 'green',
-            'customColor' => '#10b77f',
+            'themeColor' => 'custom',
+            'customColor' => '#13443B',
 
             // System Settings
             'defaultLanguage' => 'en',
