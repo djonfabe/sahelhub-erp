@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'Timesheet Module for ERPGo SaaS',
+                        'title' => 'Timesheet Module for SahelHub',
                         'subtitle' => 'Track time efficiently with multiple entry methods including manual entry, project-based tracking, and clock in/out functionality.',
                         'primary_button_text' => 'Install Timesheet Module',
                         'primary_button_link' => '#install',

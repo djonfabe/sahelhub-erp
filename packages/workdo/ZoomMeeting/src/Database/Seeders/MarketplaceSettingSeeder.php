@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'Zoom Meeting Module for ERPGo SaaS',
+                        'title' => 'Zoom Meeting Module for SahelHub',
                         'subtitle' => 'Create and manage professional video conferences with Zoom API integration, participant management, and advanced meeting controls.',
                         'primary_button_text' => 'Install Zoom Meeting Module',
                         'primary_button_link' => '#install',

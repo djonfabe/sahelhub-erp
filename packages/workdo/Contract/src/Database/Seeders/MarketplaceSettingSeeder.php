@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'Contract Module for ERPGo SaaS',
+                        'title' => 'Contract Module for SahelHub',
                         'subtitle' => 'Streamline your contract workflow with comprehensive tools and automated management.',
                         'primary_button_text' => 'Install Contract Module',
                         'primary_button_link' => '#install',

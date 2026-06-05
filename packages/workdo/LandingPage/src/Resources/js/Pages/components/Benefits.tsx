@@ -43,7 +43,7 @@ export default function Benefits({ settings }: BenefitsProps) {
     const variant = sectionData.variant || 'benefits1';
     const config = BENEFITS_VARIANTS[variant as keyof typeof BENEFITS_VARIANTS] || BENEFITS_VARIANTS.benefits1;
     
-    const title = sectionData.title || 'Why Choose ERPGo SaaS?';
+    const title = sectionData.title || 'Why Choose SahelHub?';
     const colors = settings?.config_sections?.colors || { primary: '#10b77f', secondary: '#059669', accent: '#f59e0b' };
     const [openAccordion, setOpenAccordion] = useState(0);
     const [activeTab, setActiveTab] = useState(0);

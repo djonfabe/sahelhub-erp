@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'Pos Module for ERPGo SaaS',
+                        'title' => 'Pos Module for SahelHub',
                         'subtitle' => 'Streamline your pos workflow with comprehensive tools and automated management.',
                         'primary_button_text' => 'Install Pos Module',
                         'primary_button_link' => '#install',

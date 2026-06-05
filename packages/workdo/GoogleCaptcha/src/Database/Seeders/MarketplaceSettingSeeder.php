@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'Google reCAPTCHA Module for ERPGo SaaS',
+                        'title' => 'Google reCAPTCHA Module for SahelHub',
                         'subtitle' => 'Secure your forms and prevent spam with Google reCAPTCHA v2 and v3 integration.',
                         'primary_button_text' => 'Install reCAPTCHA Module',
                         'primary_button_link' => '#install',

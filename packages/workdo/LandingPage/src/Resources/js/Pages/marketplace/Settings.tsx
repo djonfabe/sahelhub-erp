@@ -364,7 +364,7 @@ export default function Settings({ settings, activeModules, selectedModule }: Se
                                                     <Input
                                                         value={getSectionData('hero').subtitle || ''}
                                                         onChange={(e) => updateSectionData('hero', 'subtitle', e.target.value)}
-                                                        placeholder={t('Extend your ERPGo SaaS with powerful premium modules...')}
+                                                        placeholder={t('Extend your SahelHub with powerful premium modules...')}
                                                     />
                                                 </div>
                                             </div>

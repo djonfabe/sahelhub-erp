@@ -59,7 +59,7 @@ export default function Hero({ settings }: HeroProps) {
     const variant = sectionData.variant || 'hero1';
     const config = HERO_VARIANTS[variant as keyof typeof HERO_VARIANTS] || HERO_VARIANTS.hero1;
     
-    const title = sectionData.title || 'Transform Your Business with ERPGo SaaS';
+    const title = sectionData.title || 'Transform Your Business with SahelHub';
     const subtitle = sectionData.subtitle || 'The complete all-in-one business management solution that combines ERP, Accounting, CRM, POS, HRM, and Project Management into a single powerful platform.';
     const primaryButtonText = sectionData.primary_button_text || 'Start Free Trial';
     const primaryButtonLink = sectionData.primary_button_link || route('register');

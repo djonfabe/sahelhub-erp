@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections'           => [
                     'hero'        => [
                         'variant'               => 'hero1',
-                        'title'                 => 'Performance Management System for ERPGo SaaS',
+                        'title'                 => 'Performance Management System for SahelHub',
                         'subtitle'              => 'Transform your organization with comprehensive employee performance tracking, goal setting, and review management.',
                         'primary_button_text'   => 'Install Performance Management',
                         'primary_button_link'   => '#install',

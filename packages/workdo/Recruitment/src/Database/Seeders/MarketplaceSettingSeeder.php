@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'Recruitment Module for ERPGo SaaS',
+                        'title' => 'Recruitment Module for SahelHub',
                         'subtitle' => 'Transform your hiring process with advanced job posting, candidate tracking, and interview management capabilities for efficient talent acquisition and enhanced recruitment outcomes.',
                         'primary_button_text' => 'Install Recruitment Module',
                         'primary_button_link' => '#install',

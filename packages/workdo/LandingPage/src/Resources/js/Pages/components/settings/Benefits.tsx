@@ -64,7 +64,7 @@ export default function Benefits({ data, getSectionData, updateSectionData, upda
                         <Input
                             value={getSectionData('benefits').title || ''}
                             onChange={(e) => updateSectionData('benefits', { title: e.target.value })}
-                            placeholder={t('Why Choose ERPGo SaaS?')}
+                            placeholder={t('Why Choose SahelHub?')}
                         />
                     </div>
                     

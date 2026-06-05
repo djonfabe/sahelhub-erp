@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections'           => [
                     'hero'        => [
                         'variant'               => 'hero1',
-                        'title'                 => 'AI Assistant for ERPGo SaaS',
+                        'title'                 => 'AI Assistant for SahelHub',
                         'subtitle'              => 'Transform content creation across your entire platform with intelligent AI-powered generation integrated seamlessly into every form and module.',
                         'primary_button_text'   => 'Install AI Assistant Module',
                         'primary_button_link'   => '#install',

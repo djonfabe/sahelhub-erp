@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'system' => 'ERPGo SaaS',
+    'system' => 'SahelHub',
     'system_version' => '9.2',
 ];

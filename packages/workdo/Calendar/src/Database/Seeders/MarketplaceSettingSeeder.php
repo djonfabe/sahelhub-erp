@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'Calendar Module for ERPGo SaaS',
+                        'title' => 'Calendar Module for SahelHub',
                         'subtitle' => 'Streamline your calendar workflow with comprehensive tools and automated management.',
                         'primary_button_text' => 'Install Calendar Module',
                         'primary_button_link' => '#install',

@@ -40,7 +40,7 @@ export default function MarketplaceNotFound({ landingPageSettings }: Marketplace
             '--color-secondary': colorScheme.secondary,
             '--color-accent': colorScheme.accent
         } as React.CSSProperties}>
-            <Head title="Package Not Found - ERPGo SaaS Marketplace" />
+            <Head title="Package Not Found - SahelHub Marketplace" />
             
             <Header key="header" settings={updatedLandingPageSettings} />
             

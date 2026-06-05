@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'Training Module for ERPGo SaaS',
+                        'title' => 'Training Module for SahelHub',
                         'subtitle' => 'Streamline your training workflow with comprehensive tools and automated management.',
                         'primary_button_text' => 'Install Training Module',
                         'primary_button_link' => '#install',

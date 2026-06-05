@@ -25,8 +25,8 @@ class DefultSetting extends Seeder
             'logo_light' => 'logo_light.png',
             'logo_dark' => 'logo_dark.png',
             'favicon' => 'favicon.png',
-            'titleText' => !empty(env('APP_NAME')) ? env('APP_NAME') : 'ERPGo SaaS',
-            'footerText' => 'Copyright © ' . (!empty(env('APP_NAME')) ? env('APP_NAME') : 'ERPGo SaaS'),
+            'titleText' => !empty(env('APP_NAME')) ? env('APP_NAME') : 'SahelHub',
+            'footerText' => 'Copyright © ' . (!empty(env('APP_NAME')) ? env('APP_NAME') : 'SahelHub'),
             'sidebarVariant' => 'inset',
             'sidebarStyle' => 'plain',
             'layoutDirection' => 'ltr',
@@ -57,7 +57,7 @@ class DefultSetting extends Seeder
 
             // SEO Settings
             'metaKeywords' => 'erpgo, workdo, dashboard, admin, panel, management',
-            'metaTitle' => !empty(env('APP_NAME')) ? env('APP_NAME') . ' - Dashboard' : 'ERPGo SaaS - Dashboard',
+            'metaTitle' => !empty(env('APP_NAME')) ? env('APP_NAME') . ' - Dashboard' : 'SahelHub - Dashboard',
             'metaDescription' => 'Modern dashboard and management system built with Laravel and React',
             'metaImage' => 'meta_image.png',
 

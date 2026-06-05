@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'FormBuilder Module for ERPGo SaaS',
+                        'title' => 'FormBuilder Module for SahelHub',
                         'subtitle' => 'Streamline your formbuilder workflow with comprehensive tools and automated management.',
                         'primary_button_text' => 'Install FormBuilder Module',
                         'primary_button_link' => '#install',

@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'Stripe Module for ERPGo SaaS',
+                        'title' => 'Stripe Module for SahelHub',
                         'subtitle' => 'Streamline your stripe workflow with comprehensive tools and automated management.',
                         'primary_button_text' => 'Install Stripe Module',
                         'primary_button_link' => '#install',

@@ -56,7 +56,7 @@ export default function CTA({ settings }: CTAProps) {
     const config = CTA_VARIANTS[variant as keyof typeof CTA_VARIANTS] || CTA_VARIANTS.cta1;
     
     const title = sectionData.title || 'Ready to Transform Your Business?';
-    const subtitle = sectionData.subtitle || 'Join thousands of businesses already using ERPGo SaaS to streamline their operations.';
+    const subtitle = sectionData.subtitle || 'Join thousands of businesses already using SahelHub to streamline their operations.';
     const primaryButton = sectionData.primary_button || 'Start Free Trial';
     const secondaryButton = sectionData.secondary_button || 'Contact Sales';
     const colors = settings?.config_sections?.colors || { primary: '#10b77f', secondary: '#059669', accent: '#f59e0b' };

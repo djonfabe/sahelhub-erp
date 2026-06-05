@@ -62,7 +62,7 @@ export default function Header({ settings }: HeaderProps) {
     const variant = sectionData.variant || 'header1';
     const config = HEADER_VARIANTS[variant as keyof typeof HEADER_VARIANTS] || HEADER_VARIANTS.header1;
     
-    const companyName = sectionData.company_name || settings?.company_name || 'ERPGo SaaS';
+    const companyName = sectionData.company_name || settings?.company_name || 'SahelHub';
     const isAuthenticated = settings?.is_authenticated;
     const ctaText = isAuthenticated ? 'Dashboard' : (sectionData.cta_text || 'Get Started');
     const colors = settings?.config_sections?.colors || { primary: '#10b77f', secondary: '#059669', accent: '#f59e0b' };

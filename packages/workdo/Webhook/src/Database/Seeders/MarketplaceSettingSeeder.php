@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'Webhook Module for ERPGo SaaS',
+                        'title' => 'Webhook Module for SahelHub',
                         'subtitle' => 'Streamline your webhook workflow with comprehensive tools and automated management.',
                         'primary_button_text' => 'Install Webhook Module',
                         'primary_button_link' => '#install',

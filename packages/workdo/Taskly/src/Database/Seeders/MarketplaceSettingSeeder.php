@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'Taskly Module for ERPGo SaaS',
+                        'title' => 'Taskly Module for SahelHub',
                         'subtitle' => 'Streamline your taskly workflow with comprehensive tools and automated management.',
                         'primary_button_text' => 'Install Taskly Module',
                         'primary_button_link' => '#install',

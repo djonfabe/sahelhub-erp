@@ -33,7 +33,7 @@ class MarketplaceSettingSeeder extends Seeder
                 'sections' => [
                     'hero' => [
                         'variant' => 'hero1',
-                        'title' => 'SupportTicket Module for ERPGo SaaS',
+                        'title' => 'SupportTicket Module for SahelHub',
                         'subtitle' => 'Streamline your supportticket workflow with comprehensive tools and automated management.',
                         'primary_button_text' => 'Install SupportTicket Module',
                         'primary_button_link' => '#install',
