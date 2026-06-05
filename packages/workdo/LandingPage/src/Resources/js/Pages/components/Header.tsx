@@ -232,9 +232,9 @@ export default function Header({ settings }: HeaderProps) {
                 <div className={config.wrapper}>
                     <Link href={route('landing.page')} className={config.logo} style={{ color: colors.primary }}>
                         {logoUrl ? (
-                            <img src={logoUrl} alt={companyName} className="w-auto" />
+                            <img src={logoUrl} alt={companyName} className="h-10 w-auto" />
                         ) : (
-                            companyName
+                            <img src="/images/sahelhub-logo.svg" alt="SahelHub" className="h-10 w-auto" />
                         )}
                     </Link>
                     

@@ -1,0 +1,39 @@
+<svg width="360" height="320" viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SahelHub">
+  <defs>
+    <linearGradient id="sahelWarm2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F4B23E"/>
+      <stop offset="55%" stop-color="#E0762A"/>
+      <stop offset="100%" stop-color="#C2461A"/>
+    </linearGradient>
+    <linearGradient id="sahelCore2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBD27E"/>
+      <stop offset="100%" stop-color="#E0762A"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(120,20)">
+    <g stroke="url(#sahelWarm2)" stroke-width="5" stroke-linecap="round" opacity="0.9">
+      <line x1="60" y1="60" x2="60"     y2="18"/>
+      <line x1="60" y1="60" x2="96.37"  y2="39"/>
+      <line x1="60" y1="60" x2="96.37"  y2="81"/>
+      <line x1="60" y1="60" x2="60"     y2="102"/>
+      <line x1="60" y1="60" x2="23.63"  y2="81"/>
+      <line x1="60" y1="60" x2="23.63"  y2="39"/>
+    </g>
+    <polygon points="60,18 96.37,39 96.37,81 60,102 23.63,81 23.63,39"
+             fill="none" stroke="#13443B" stroke-width="5" stroke-linejoin="round" opacity="0.92"/>
+    <g fill="#13443B">
+      <circle cx="96.37" cy="39" r="9"/><circle cx="96.37" cy="81" r="9"/>
+      <circle cx="60" cy="102" r="9"/><circle cx="23.63" cy="81" r="9"/>
+      <circle cx="23.63" cy="39" r="9"/>
+    </g>
+    <circle cx="60" cy="18" r="11" fill="url(#sahelCore2)"/>
+    <circle cx="60" cy="60" r="20" fill="url(#sahelWarm2)"/>
+    <circle cx="60" cy="60" r="8.5" fill="#FFF7EA"/>
+  </g>
+
+  <g font-family="'Poppins','Montserrat','Segoe UI',Arial,sans-serif" text-anchor="middle">
+    <text x="180" y="222" font-size="56" font-weight="600" letter-spacing="-1.5" fill="#13443B">Sahel<tspan fill="url(#sahelWarm2)" font-weight="700">Hub</tspan></text>
+    <text x="180" y="256" font-size="15.5" font-weight="500" letter-spacing="5" fill="#6B7C77">ERP &#183; GESTION D'ENTREPRISE</text>
+  </g>
+</svg>
