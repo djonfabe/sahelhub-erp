@@ -4,6 +4,7 @@ namespace Tests\Feature\Security;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
@@ -28,7 +29,7 @@ class ModuleNameInjectionTest extends TestCase
     // Shell metacharacters and path traversal are rejected before Artisan runs
     // -------------------------------------------------------------------------
 
-    /** @dataProvider maliciousModuleNames */
+    #[DataProvider('maliciousModuleNames')]
     public function test_malicious_module_name_is_rejected(string $name): void
     {
         $admin = $this->adminWith(['manage-add-on']);
@@ -62,7 +63,7 @@ class ModuleNameInjectionTest extends TestCase
     //  but it must NOT return the "Invalid module name" error)
     // -------------------------------------------------------------------------
 
-    /** @dataProvider validModuleNames */
+    #[DataProvider('validModuleNames')]
     public function test_valid_module_name_passes_regex_guard(string $name): void
     {
         $admin = $this->adminWith(['manage-add-on']);

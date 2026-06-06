@@ -5,6 +5,7 @@ namespace Tests\Feature\Security;
 use App\Models\HelpdeskTicket;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
@@ -29,7 +30,7 @@ class SortInjectionTest extends TestCase
     // Allowlisted columns are accepted
     // -------------------------------------------------------------------------
 
-    /** @dataProvider validSortColumns */
+    #[DataProvider('validSortColumns')]
     public function test_valid_sort_column_returns_ok(string $column): void
     {
         $user = $this->companyWith(['manage-helpdesk-tickets', 'manage-own-helpdesk-tickets']);
@@ -56,7 +57,7 @@ class SortInjectionTest extends TestCase
     // Columns outside the allowlist are silently ignored (no SQL error)
     // -------------------------------------------------------------------------
 
-    /** @dataProvider maliciousSortValues */
+    #[DataProvider('maliciousSortValues')]
     public function test_malicious_sort_column_does_not_cause_error(string $column): void
     {
         $user = $this->companyWith(['manage-helpdesk-tickets', 'manage-own-helpdesk-tickets']);

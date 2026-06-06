@@ -4,6 +4,7 @@ namespace Tests\Feature\Security;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 use Workdo\Recruitment\Http\Requests\SubmitApplicationRequest;
 
@@ -42,7 +43,7 @@ class FileUploadValidationTest extends TestCase
     // Dangerous file types are rejected
     // -------------------------------------------------------------------------
 
-    /** @dataProvider dangerousFileTypes */
+    #[DataProvider('dangerousFileTypes')]
     public function test_dangerous_file_type_is_rejected(string $name, string $mime): void
     {
         $file = UploadedFile::fake()->create($name, 100, $mime);
