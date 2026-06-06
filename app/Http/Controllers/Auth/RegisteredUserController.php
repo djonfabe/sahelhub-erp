@@ -21,10 +21,10 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response|RedirectResponse
     {
-        // Check if registration is enabled
+        // Check if registration is enabled (default: enabled)
         $enableRegistration = admin_setting('enableRegistration');
 
-        if ($enableRegistration !== 'on') {
+        if ($enableRegistration === 'off') {
             return redirect()->route('login');
         }
 
@@ -38,10 +38,10 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // Check if registration is enabled
+        // Check if registration is enabled (default: enabled)
         $enableRegistration = admin_setting('enableRegistration');
 
-        if ($enableRegistration !== 'on') {
+        if ($enableRegistration === 'off') {
             return redirect()->route('login');
         }
 
@@ -73,7 +73,7 @@ class RegisteredUserController extends Controller
             Auth::login($user);
 
              // Send welcome email
-            if(admin_setting('New User') == 'on') {
+            if($adminUser && admin_setting('New User') == 'on') {
                 $emailData = [
                     'name' => $user->name,
                     'email' => $user->email,
@@ -85,7 +85,9 @@ class RegisteredUserController extends Controller
 
             if ($enableEmailVerification === 'on') {
                 // Apply dynamic mail configuration
-                SetConfigEmail($adminUser->id);
+                if ($adminUser) {
+                    SetConfigEmail($adminUser->id);
+                }
                 $user->sendEmailVerificationNotification();
                 return redirect(route('verification.notice'))->with('status', 'verification-link-sent');
             }
