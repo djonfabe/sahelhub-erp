@@ -15,9 +15,9 @@ git pull origin master
 # PHP dependencies (no dev, optimised autoloader)
 composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
-# Frontend assets (devDeps needed for TypeScript build)
+# Frontend assets (tsc type-checking already done in CI; vite build only)
 npm ci
-npm run build
+npm run build:deploy
 
 # Run pending migrations
 php artisan migrate --force
