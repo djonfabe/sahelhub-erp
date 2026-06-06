@@ -15,8 +15,8 @@ git pull origin master
 # PHP dependencies (no dev, optimised autoloader)
 composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
-# Frontend assets
-npm ci --omit=dev
+# Frontend assets (devDeps needed for TypeScript build)
+npm ci
 npm run build
 
 # Run pending migrations
