@@ -6,6 +6,9 @@ APP_DIR="/var/www/sahelhub"
 echo "==> Deploying SahelHub..."
 cd "$APP_DIR"
 
+# Allow git to operate on this directory regardless of ownership
+git config --global --add safe.directory "$APP_DIR"
+
 # Pull latest code
 git pull origin master
 
