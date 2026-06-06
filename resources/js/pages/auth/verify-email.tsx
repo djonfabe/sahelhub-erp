@@ -9,7 +9,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
     const { post, processing, errors: formErrors } = useForm({});
     const { errors: pageErrors } = usePage().props as any;
 
-    const emailError = formErrors.email || pageErrors?.email;
+    const emailError = (formErrors as any).email || pageErrors?.email;
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
