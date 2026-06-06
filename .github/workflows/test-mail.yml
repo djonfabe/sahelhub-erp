@@ -1,0 +1,51 @@
+name: Test Mail
+
+on:
+  workflow_dispatch:
+    inputs:
+      recipient:
+        description: 'Adresse e-mail de test'
+        required: true
+        default: 'djonfabetamibepascal@gmail.com'
+
+jobs:
+  test-mail:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test SMTP via VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            cd /var/www/sahelhub
+
+            echo "==> Statut Postfix"
+            systemctl is-active postfix && echo "Postfix actif" || echo "ERREUR: Postfix inactif"
+
+            echo ""
+            echo "==> Envoi e-mail de test vers ${{ github.event.inputs.recipient }}"
+            php artisan tinker --execute="
+              \$adminUser = App\Models\User::where('type','superadmin')->first();
+              if (\$adminUser) { SetConfigEmail(\$adminUser->id); }
+              \Illuminate\Support\Facades\Mail::raw(
+                'Ceci est un e-mail de test envoyé depuis SahelHub (' . config('app.url') . ') via Postfix local.',
+                function(\$m) {
+                  \$m->to('${{ github.event.inputs.recipient }}')
+                     ->subject('Test SahelHub — e-mail de vérification');
+                }
+              );
+              echo 'Mail envoyé sans erreur.';
+            " 2>&1
+
+            echo ""
+            echo "==> Queue Postfix (messages en attente)"
+            mailq 2>/dev/null | head -20 || echo "(queue vide ou mailq indisponible)"
+
+            echo ""
+            echo "==> 20 dernières lignes du log mail"
+            tail -20 /var/log/mail.log 2>/dev/null || \
+            tail -20 /var/log/maillog 2>/dev/null || \
+            journalctl -u postfix --no-pager -n 20 2>/dev/null || \
+            echo "(log indisponible)"
