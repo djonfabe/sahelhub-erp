@@ -52,11 +52,11 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $enableEmailVerification = admin_setting('enableEmailVerification');
+        $adminUser = User::where('type', 'superadmin')->first();
+
+        // Step 1 : create the user and assign role
         try {
-            $enableEmailVerification = admin_setting('enableEmailVerification');
-
-            $adminUser = User::where('type', 'superadmin')->first();
-
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -76,31 +76,37 @@ class RegisteredUserController extends Controller
             $user->assignRole($user->type);
 
             Auth::login($user);
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => __('Registration failed. Please try again.')]);
+        }
 
-             // Send welcome email
-            if($adminUser && admin_setting('New User') == 'on') {
-                $emailData = [
-                    'name' => $user->name,
-                    'email' => $user->email,
+        // Step 2 : send welcome e-mail (non-blocking)
+        if ($adminUser && admin_setting('New User') == 'on') {
+            try {
+                EmailTemplate::sendEmailTemplate('New User', [$user->email], [
+                    'name'     => $user->name,
+                    'email'    => $user->email,
                     'password' => $request->password,
-                ];
+                ], $adminUser->id);
+            } catch (\Throwable) {}
+        }
 
-                EmailTemplate::sendEmailTemplate('New User', [$user->email], $emailData, $adminUser->id);
-            }
-
-            if ($enableEmailVerification === 'on') {
-                // Apply dynamic mail configuration
+        // Step 3 : e-mail verification flow
+        if ($enableEmailVerification === 'on') {
+            try {
                 if ($adminUser) {
                     SetConfigEmail($adminUser->id);
                 }
                 $user->sendEmailVerificationNotification();
-                return redirect(route('verification.notice'))->with('status', 'verification-link-sent');
+                return redirect(route('verification.notice'))
+                    ->with('status', 'verification-link-sent');
+            } catch (\Throwable) {
+                // SMTP not configured — still send to verification page so user can retry
+                return redirect(route('verification.notice'))
+                    ->withErrors(['email' => __('Failed to send verification email. Please check your email settings or use the resend button.')]);
             }
-
-            return redirect(route('dashboard', absolute: false));
-
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Registration failed. Please try again.']);
         }
+
+        return redirect(route('dashboard', absolute: false));
     }
 }

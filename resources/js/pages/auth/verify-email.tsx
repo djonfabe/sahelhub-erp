@@ -1,12 +1,15 @@
 import { Button } from '@/components/ui/button';
 import AuthLayout from '@/layouts/auth-layout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export default function VerifyEmail({ status }: { status?: string }) {
     const { t } = useTranslation();
-    const { post, processing, errors } = useForm({});
+    const { post, processing, errors: formErrors } = useForm({});
+    const { errors: pageErrors } = usePage().props as any;
+
+    const emailError = formErrors.email || pageErrors?.email;
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -26,9 +29,9 @@ export default function VerifyEmail({ status }: { status?: string }) {
                 </div>
             )}
 
-            {(errors as any).email && (
+            {emailError && (
                 <div className="mb-4 text-center text-sm font-medium text-red-600">
-                    {(errors as any).email}
+                    {emailError}
                 </div>
             )}
 
@@ -39,7 +42,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
                         disabled={processing}
                         className="w-full bg-primary text-white py-2.5 text-sm font-medium tracking-wide transition-all duration-200 rounded-md shadow-md hover:shadow-lg transform hover:scale-[1.02]"
                     >
-                        {processing ? 'Loading...' : t('RESEND VERIFICATION EMAIL')}
+                        {processing ? t('Sending...') : t('RESEND VERIFICATION EMAIL')}
                     </Button>
                 </form>
 

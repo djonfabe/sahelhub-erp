@@ -40,7 +40,7 @@ class DefultSetting extends Seeder
             'timeFormat' => 'H:i',
             'calendarStartDay' => '0',
             'enableRegistration' => 'on',
-            'enableEmailVerification' => 'off',
+            'enableEmailVerification' => 'on',
             'landingPageEnabled' => 'on',
             'termsConditionsUrl' => '',
 
