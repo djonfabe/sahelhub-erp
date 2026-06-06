@@ -32,6 +32,7 @@ postconf -e "inet_protocols = ipv4"
 postconf -e "mydestination = sahelhub.com, localhost.sahelhub.com, localhost"
 postconf -e "relayhost ="
 postconf -e "smtpd_banner = \$myhostname ESMTP"
+postconf -e "smtpd_tls_security_level = none"
 systemctl enable postfix --quiet 2>/dev/null || true
 systemctl restart postfix
 # ────────────────────────────────────────────────────────────────────────────
