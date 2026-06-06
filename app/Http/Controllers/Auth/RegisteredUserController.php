@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\EmailTemplate;
+use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -68,6 +69,10 @@ class RegisteredUserController extends Controller
 
             User::CompanySetting($user->id);
             User::MakeRole($user->id);
+            Role::firstOrCreate(
+                ['name' => $user->type, 'guard_name' => 'web'],
+                ['label' => ucfirst($user->type), 'editable' => false, 'created_by' => $adminUser?->id]
+            );
             $user->assignRole($user->type);
 
             Auth::login($user);
