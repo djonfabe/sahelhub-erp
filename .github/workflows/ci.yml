@@ -71,6 +71,11 @@ jobs:
       - name: Create storage/installed to bypass installer middleware
         run: echo "install $(date)" > storage/installed
 
+      - name: Create fake Vite manifest for testing
+        run: |
+          mkdir -p public/build
+          printf '{"resources/css/app.css":{"file":"assets/app.css","src":"resources/css/app.css","isEntry":true},"resources/js/app.tsx":{"file":"assets/app.js","src":"resources/js/app.tsx","isEntry":true,"css":["assets/app.css"]}}' > public/build/manifest.json
+
       - name: Run migrations
         run: php artisan migrate --force
 
