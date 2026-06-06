@@ -52,7 +52,7 @@ const CTA_VARIANTS = {
 export default function CTA({ settings }: CTAProps) {
     const { t } = useTranslation();
     const sectionData = settings?.config_sections?.sections?.cta || {};
-    const variant = sectionData.variant || 'cta1';
+    const variant = sectionData.variant || 'cta4';
     const config = CTA_VARIANTS[variant as keyof typeof CTA_VARIANTS] || CTA_VARIANTS.cta1;
     
     const title = sectionData.title || 'Ready to Transform Your Business?';

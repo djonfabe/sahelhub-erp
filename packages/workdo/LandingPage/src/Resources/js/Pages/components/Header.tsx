@@ -59,7 +59,7 @@ const HEADER_VARIANTS = {
 export default function Header({ settings }: HeaderProps) {
     const sectionData = settings?.config_sections?.sections?.header || {};
     const { t } = useTranslation();
-    const variant = sectionData.variant || 'header1';
+    const variant = sectionData.variant || 'header3';
     const config = HEADER_VARIANTS[variant as keyof typeof HEADER_VARIANTS] || HEADER_VARIANTS.header1;
     
     const companyName = sectionData.company_name || settings?.company_name || 'SahelHub';

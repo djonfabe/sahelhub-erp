@@ -40,7 +40,7 @@ const BENEFITS_VARIANTS = {
 
 export default function Benefits({ settings }: BenefitsProps) {
     const sectionData = settings?.config_sections?.sections?.benefits || {};
-    const variant = sectionData.variant || 'benefits1';
+    const variant = sectionData.variant || 'benefits2';
     const config = BENEFITS_VARIANTS[variant as keyof typeof BENEFITS_VARIANTS] || BENEFITS_VARIANTS.benefits1;
     
     const title = sectionData.title || 'Why Choose SahelHub?';

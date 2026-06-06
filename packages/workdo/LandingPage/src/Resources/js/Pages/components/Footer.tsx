@@ -71,7 +71,7 @@ export default function Footer({ settings }: FooterProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const sectionData = settings?.config_sections?.sections?.footer || {};
-    const variant = sectionData.variant || 'footer1';
+    const variant = sectionData.variant || 'footer5';
     const config = FOOTER_VARIANTS[variant as keyof typeof FOOTER_VARIANTS] || FOOTER_VARIANTS.footer1;
     
     const companyName = settings?.company_name || 'SahelHub';

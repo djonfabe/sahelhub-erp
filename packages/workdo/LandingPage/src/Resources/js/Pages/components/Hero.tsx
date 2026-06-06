@@ -50,13 +50,24 @@ const HERO_VARIANTS = {
         secondaryBtn: 'text-gray-600 px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-all duration-200 border border-gray-200 hover:border-gray-300',
         layout: 'minimal',
         showImage: false
+    },
+    hero5: {
+        section: 'relative py-28 md:py-36 overflow-hidden',
+        container: 'relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white z-10',
+        title: 'text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight',
+        subtitle: 'text-lg md:text-xl mb-10 max-w-3xl mx-auto leading-relaxed',
+        buttons: 'flex flex-col sm:flex-row gap-4 justify-center items-center',
+        primaryBtn: 'text-white px-8 py-4 rounded-xl text-base font-bold flex items-center justify-center transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5',
+        secondaryBtn: 'border-2 border-white/30 text-white px-8 py-4 rounded-xl text-base font-semibold hover:bg-white/10 hover:border-white/50 transition-all duration-300',
+        layout: 'branded',
+        showImage: false
     }
 };
 
 export default function Hero({ settings }: HeroProps) {
     const { t } = useTranslation();
     const sectionData = settings?.config_sections?.sections?.hero || {};
-    const variant = sectionData.variant || 'hero1';
+    const variant = sectionData.variant || 'hero5';
     const config = HERO_VARIANTS[variant as keyof typeof HERO_VARIANTS] || HERO_VARIANTS.hero1;
     
     const title = sectionData.title || 'Transform Your Business with SahelHub';
@@ -151,6 +162,65 @@ export default function Hero({ settings }: HeroProps) {
             {renderButtons()}
         </div>
     );
+
+    if (config.layout === 'branded') {
+        return (
+            <section className={config.section} style={{ backgroundColor: colors.primary }}>
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <svg className="absolute -top-10 -right-10 w-[500px] h-[500px] opacity-[0.07]" viewBox="0 0 200 231" preserveAspectRatio="xMidYMid slice">
+                        <defs>
+                            <pattern id="hexgrid" x="0" y="0" width="40" height="46" patternUnits="userSpaceOnUse">
+                                <polygon points="20,0 40,11.5 40,34.5 20,46 0,34.5 0,11.5" fill="none" stroke="white" strokeWidth="1.5"/>
+                            </pattern>
+                        </defs>
+                        <rect width="200" height="231" fill="url(#hexgrid)"/>
+                    </svg>
+                    <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full opacity-[0.07] blur-3xl" style={{ backgroundColor: colors.secondary }}></div>
+                    <div className="absolute top-10 right-1/3 w-[200px] h-[200px] rounded-full opacity-[0.05] blur-2xl" style={{ backgroundColor: colors.accent }}></div>
+                    <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/40 rounded-full animate-ping"></div>
+                    <div className="absolute top-3/4 right-1/4 w-1.5 h-1.5 bg-white/30 rounded-full animate-ping" style={{ animationDelay: '700ms' }}></div>
+                    <div className="absolute top-1/2 right-1/3 w-1 h-1 bg-white/20 rounded-full animate-ping" style={{ animationDelay: '1200ms' }}></div>
+                </div>
+                <div className={config.container}>
+                    <div className="mb-6">
+                        <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium border border-white/20" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
+                            🌍 La solution ERP tout-en-un pour l'Afrique
+                        </span>
+                    </div>
+                    <h1 className={config.title}>{renderTitle()}</h1>
+                    <p className={`${config.subtitle} opacity-85`}>{subtitle}</p>
+                    <div className={config.buttons}>
+                        <button
+                            className={config.primaryBtn}
+                            style={{ backgroundColor: colors.secondary }}
+                            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = colors.accent; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = colors.secondary; }}
+                            onClick={() => window.location.href = primaryButtonLink}
+                        >
+                            {primaryButtonText}
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                        </button>
+                        <button
+                            className={config.secondaryBtn}
+                            onClick={() => window.location.href = secondaryButtonLink}
+                        >
+                            {secondaryButtonText}
+                        </button>
+                    </div>
+                    <div className="mt-12 flex flex-wrap justify-center gap-6 md:gap-10">
+                        {['20,000+ entreprises', '99.9% disponibilité', 'Support 24/7', '70+ pays'].map((item, i) => (
+                            <div key={i} className="flex items-center gap-2 text-white/70 text-sm">
+                                <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                                </svg>
+                                {item}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className={config.section}>

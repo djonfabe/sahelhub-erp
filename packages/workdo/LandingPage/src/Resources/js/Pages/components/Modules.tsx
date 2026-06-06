@@ -48,7 +48,7 @@ const MODULES_VARIANTS = {
 export default function Modules({ settings }: ModulesProps) {
     const { t } = useTranslation();
     const sectionData = settings?.config_sections?.sections?.modules || {};
-    const variant = sectionData.variant || 'modules1';
+    const variant = sectionData.variant || 'modules5';
     const config = MODULES_VARIANTS[variant as keyof typeof MODULES_VARIANTS] || MODULES_VARIANTS.modules1;
     
     const title = sectionData.title || 'Complete Business Solutions';

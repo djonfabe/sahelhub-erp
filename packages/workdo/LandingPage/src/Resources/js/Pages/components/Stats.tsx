@@ -47,7 +47,7 @@ const STATS_VARIANTS = {
 
 export default function Stats({ settings }: StatsProps) {
     const sectionData = settings?.config_sections?.sections?.stats || {};
-    const variant = sectionData.variant || 'stats1';
+    const variant = sectionData.variant || 'stats2';
     const config = STATS_VARIANTS[variant as keyof typeof STATS_VARIANTS] || STATS_VARIANTS.stats1;
     
     const colors = settings?.config_sections?.colors || { primary: '#13443B', secondary: '#E0762A', accent: '#F4B23E' };

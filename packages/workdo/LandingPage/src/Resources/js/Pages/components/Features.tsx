@@ -50,7 +50,7 @@ const FEATURES_VARIANTS = {
 
 export default function Features({ settings }: FeaturesProps) {
     const sectionData = settings?.config_sections?.sections?.features || {};
-    const variant = sectionData.variant || 'features1';
+    const variant = sectionData.variant || 'features3';
     const config = FEATURES_VARIANTS[variant as keyof typeof FEATURES_VARIANTS] || FEATURES_VARIANTS.features1;
     
     const title = sectionData.title || 'Powerful Features';

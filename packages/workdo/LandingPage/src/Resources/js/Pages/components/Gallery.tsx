@@ -47,7 +47,7 @@ const GALLERY_VARIANTS = {
 export default function Gallery({ settings }: GalleryProps) {
     const { t } = useTranslation();
     const sectionData = settings?.config_sections?.sections?.gallery || {};
-    const variant = sectionData.variant || 'gallery1';
+    const variant = sectionData.variant || 'gallery2';
     const config = GALLERY_VARIANTS[variant as keyof typeof GALLERY_VARIANTS] || GALLERY_VARIANTS.gallery1;
     
     const title = sectionData.title || 'Gallery';
