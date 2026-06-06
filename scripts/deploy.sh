@@ -32,7 +32,12 @@ postconf -e "inet_protocols = ipv4"
 postconf -e "mydestination = sahelhub.com, localhost.sahelhub.com, localhost"
 postconf -e "relayhost ="
 postconf -e "smtpd_banner = \$myhostname ESMTP"
+# Disable all inbound TLS — loopback relay, no TLS needed.
+# Clear cert files so Postfix has nothing to offer and CANNOT advertise STARTTLS.
 postconf -e "smtpd_tls_security_level = none"
+postconf -e "smtpd_use_tls = no"
+postconf -e "smtpd_tls_cert_file ="
+postconf -e "smtpd_tls_key_file ="
 systemctl enable postfix --quiet 2>/dev/null || true
 systemctl restart postfix
 # ────────────────────────────────────────────────────────────────────────────

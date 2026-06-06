@@ -568,6 +568,11 @@ if (!function_exists('SetConfigEmail')) {
                 'mail.from.address' => $company_settings['email_fromAddress'] ?? 'noreply@example.com',
                 'mail.from.name' => $fromName,
             ]);
+            // Purge any cached mailer so the next Mail:: call builds a fresh transport
+            // from the config we just set above.
+            if (app()->bound('mail.manager')) {
+                try { app('mail.manager')->purge(); } catch (\Throwable) {}
+            }
             return true;
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
