@@ -59,7 +59,7 @@ export function LanguageSwitcher() {
         i18n.changeLanguage(languageCode);
 
         if (auth?.user.roles) {
-            router.post(route('languages.change'), { lang: languageCode }, { preserveState: true });
+            router.post(route('languages.change'), { lang: languageCode }, { preserveScroll: true });
         }
     };
 

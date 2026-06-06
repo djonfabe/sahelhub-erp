@@ -50,7 +50,7 @@ i18n
     .use(initReactI18next)
     .init({
         lng: userLang,
-        fallbackLng: userLang,
+        fallbackLng: 'en',
         interpolation: {
             escapeValue: false,
         }
