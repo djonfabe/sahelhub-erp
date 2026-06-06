@@ -40,12 +40,21 @@ jobs:
             " 2>&1
 
             echo ""
+            echo "==> Config Postfix (mydestination / virtual_mailbox_domains)"
+            postconf mydestination
+            postconf virtual_mailbox_domains 2>/dev/null || echo "(virtual_mailbox_domains non défini)"
+
+            echo ""
+            echo "==> Attente 3s pour laisser Postfix tenter la livraison..."
+            sleep 3
+
+            echo ""
             echo "==> Queue Postfix (messages en attente)"
             mailq 2>/dev/null | head -20 || echo "(queue vide ou mailq indisponible)"
 
             echo ""
-            echo "==> 20 dernières lignes du log mail"
-            tail -20 /var/log/mail.log 2>/dev/null || \
-            tail -20 /var/log/maillog 2>/dev/null || \
-            journalctl -u postfix --no-pager -n 20 2>/dev/null || \
+            echo "==> 40 dernières lignes du log mail"
+            tail -40 /var/log/mail.log 2>/dev/null || \
+            tail -40 /var/log/maillog 2>/dev/null || \
+            journalctl -u postfix --no-pager -n 40 2>/dev/null || \
             echo "(log indisponible)"
