@@ -1,0 +1,28 @@
+name: Check Landing Page
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vérifier le bouton hero via VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            cd /var/www/sahelhub
+
+            echo "==> Texte du bouton hero (primary_button_text)"
+            php artisan tinker --execute="
+              \$s = DB::table('landing_page_settings')->first();
+              if (!\$s) { echo 'Aucune entrée landing_page_settings'; exit; }
+              \$config = json_decode(\$s->config_sections, true);
+              \$btn = \$config['sections']['hero']['primary_button_text'] ?? '(non défini)';
+              \$link = \$config['sections']['hero']['primary_button_link'] ?? '(non défini)';
+              echo 'primary_button_text : ' . \$btn . PHP_EOL;
+              echo 'primary_button_link : ' . \$link . PHP_EOL;
+            " 2>&1
