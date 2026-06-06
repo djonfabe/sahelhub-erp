@@ -29,7 +29,7 @@ postconf -e "mydomain = sahelhub.com"
 postconf -e "myorigin = sahelhub.com"
 postconf -e "inet_interfaces = loopback-only"
 postconf -e "inet_protocols = ipv4"
-postconf -e "mydestination = sahelhub.com, localhost.sahelhub.com, localhost"
+postconf -e "mydestination = localhost.sahelhub.com, localhost"
 postconf -e "relayhost ="
 postconf -e "smtpd_banner = \$myhostname ESMTP"
 # Disable all inbound TLS — loopback relay, no TLS needed.
