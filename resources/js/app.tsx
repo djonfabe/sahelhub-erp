@@ -1,7 +1,7 @@
 import "./bootstrap";
 import "../css/app.css";
 import "../css/rtl.css";
-import "./i18n";
+import i18n from "./i18n";
 
 import { createRoot } from "react-dom/client";
 import { createInertiaApp, router } from "@inertiajs/react";
@@ -26,6 +26,14 @@ const refreshToken = async () => {
         }
     } catch (e) {}
 };
+
+// Sync i18n language whenever Inertia navigates to a new page
+router.on('navigate', (event) => {
+    const lang = (event.detail.page.props as any)?.auth?.lang;
+    if (lang && lang !== i18n.language) {
+        i18n.changeLanguage(lang);
+    }
+});
 
 router.on('before', (event) => {
     const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
