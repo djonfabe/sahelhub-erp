@@ -19,6 +19,23 @@ composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 npm ci
 npm run build:deploy
 
+# ── Postfix (relai mail local) ──────────────────────────────────────────────
+if ! dpkg -l postfix 2>/dev/null | grep -q '^ii'; then
+    echo "==> Installation de Postfix..."
+    DEBIAN_FRONTEND=noninteractive apt-get install -y postfix
+fi
+postconf -e "myhostname = sahelhub.com"
+postconf -e "mydomain = sahelhub.com"
+postconf -e "myorigin = sahelhub.com"
+postconf -e "inet_interfaces = loopback-only"
+postconf -e "inet_protocols = ipv4"
+postconf -e "mydestination = sahelhub.com, localhost.sahelhub.com, localhost"
+postconf -e "relayhost ="
+postconf -e "smtpd_banner = \$myhostname ESMTP"
+systemctl enable postfix --quiet 2>/dev/null || true
+systemctl restart postfix
+# ────────────────────────────────────────────────────────────────────────────
+
 # Run pending migrations
 php artisan migrate --force
 

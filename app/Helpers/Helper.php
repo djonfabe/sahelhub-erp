@@ -546,14 +546,27 @@ if (!function_exists('SetConfigEmail')) {
                 throw new \Exception(__('Email host is not configured'));
             }
 
+            // Empty string = no encryption (e.g. local Postfix on port 25)
+            $encryption = $company_settings['email_encryption'] ?? null;
+            if ($encryption === '' || $encryption === 'none') {
+                $encryption = null;
+            }
+
+            $username = !empty($company_settings['email_username']) ? $company_settings['email_username'] : null;
+            $password = !empty($company_settings['email_password']) ? $company_settings['email_password'] : null;
+
+            $fromName = $company_settings['company_email_from_name']
+                ?? config('app.name', 'SahelHub');
+
             config([
                 'mail.default' => $company_settings['email_driver'] ?? 'smtp',
                 'mail.mailers.smtp.host' => $company_settings['email_host'],
-                'mail.mailers.smtp.port' => $company_settings['email_port'] ?? 587,
-                'mail.mailers.smtp.encryption' => $company_settings['email_encryption'] ?? 'tls',
-                'mail.mailers.smtp.username' => $company_settings['email_username'] ?? '',
-                'mail.mailers.smtp.password' => $company_settings['email_password'] ?? '',
+                'mail.mailers.smtp.port' => (int)($company_settings['email_port'] ?? 587),
+                'mail.mailers.smtp.encryption' => $encryption,
+                'mail.mailers.smtp.username' => $username,
+                'mail.mailers.smtp.password' => $password,
                 'mail.from.address' => $company_settings['email_fromAddress'] ?? 'noreply@example.com',
+                'mail.from.name' => $fromName,
             ]);
             return true;
         } catch (\Exception $e) {
