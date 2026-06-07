@@ -73,3 +73,26 @@ jobs:
             echo ""
             echo "── 5. Queue Postfix ──"
             mailq 2>/dev/null | head -10 || echo "(queue vide)"
+
+            # ── 6. Test Postfix direct (sans Laravel) ─────────────────────
+            echo ""
+            echo "── 6. Test sendmail direct (bypass Laravel) ──"
+            echo "Subject: [Direct] Test Postfix SahelHub
+From: info@sahelhub.com
+To: djonfabetamibepascal@gmail.com
+
+Test direct via sendmail — $(date)" | sendmail -v djonfabetamibepascal@gmail.com 2>&1 || echo "sendmail échoué"
+
+            # ── 7. Log après test direct ───────────────────────────────────
+            echo ""
+            echo "── 7. Log Postfix après test direct ──"
+            sleep 5
+            tail -20 /var/log/mail.log 2>/dev/null || \
+            journalctl -u postfix --no-pager -n 20 2>/dev/null || \
+            echo "(log indisponible)"
+
+            # ── 8. Config Postfix complète (clés critiques) ───────────────
+            echo ""
+            echo "── 8. Config Postfix (clés critiques) ──"
+            postconf myhostname myorigin mydestination relayhost inet_interfaces
+            postconf smtpd_tls_security_level smtpd_tls_cert_file 2>/dev/null || true
