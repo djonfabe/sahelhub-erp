@@ -1,0 +1,129 @@
+name: Test Registration Flow
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_email:
+        description: 'Email de réception pour le test'
+        required: true
+        default: 'djonfabetamibepascal@gmail.com'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tester le flux d'inscription complet
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            cd /var/www/sahelhub
+
+            TEST_EMAIL="${{ github.event.inputs.test_email }}"
+            TEST_NAME="Test SahelHub"
+            TEST_PASSWORD="TestSahelHub2026!"
+
+            echo "════════════════════════════════════════"
+            echo "  FLUX D'INSCRIPTION — TEST AUTOMATISÉ"
+            echo "════════════════════════════════════════"
+
+            # ── 1. Vérifier les paramètres d'inscription ──────────────────
+            echo ""
+            echo "── 1. Paramètres système ──"
+            php artisan tinker --execute="
+              \$admin = App\Models\User::where('type','superadmin')->first();
+              if (!\$admin) { echo 'ERREUR: superadmin introuvable'; exit(1); }
+              SetConfigEmail(\$admin->id);
+              echo 'Inscription activée    : ' . admin_setting('enableRegistration') . PHP_EOL;
+              echo 'Vérif. email activée   : ' . admin_setting('enableEmailVerification') . PHP_EOL;
+              echo 'Langue par défaut      : ' . admin_setting('defaultLanguage') . PHP_EOL;
+              echo 'Devise                 : ' . admin_setting('currencySymbol') . PHP_EOL;
+            " 2>&1
+
+            # ── 2. Nettoyer un éventuel compte test précédent ─────────────
+            echo ""
+            echo "── 2. Nettoyage compte test précédent ──"
+            php artisan tinker --execute="
+              \$existing = App\Models\User::where('email', '$TEST_EMAIL')
+                ->where('type','!=','superadmin')->first();
+              if (\$existing) {
+                \$existing->delete();
+                echo 'Ancien compte test supprimé.' . PHP_EOL;
+              } else {
+                echo 'Aucun compte test existant.' . PHP_EOL;
+              }
+            " 2>&1
+
+            # ── 3. Créer le compte (simuler l'inscription) ────────────────
+            echo ""
+            echo "── 3. Création du compte ($TEST_EMAIL) ──"
+            php artisan tinker --execute="
+              \$admin = App\Models\User::where('type','superadmin')->first();
+              \$user = App\Models\User::create([
+                'name'     => '$TEST_NAME',
+                'email'    => '$TEST_EMAIL',
+                'password' => Hash::make('$TEST_PASSWORD'),
+                'type'     => 'company',
+                'lang'     => 'fr',
+                'email_verified_at' => null,
+                'created_by' => \$admin->id,
+              ]);
+              App\Models\User::CompanySetting(\$user->id);
+              App\Models\User::MakeRole(\$user->id);
+              \$user->assignRole('company');
+              echo 'Compte créé — ID : ' . \$user->id . PHP_EOL;
+              echo 'Email vérifié  : ' . (\$user->email_verified_at ? 'oui' : 'non') . PHP_EOL;
+            " 2>&1
+
+            # ── 4. Envoyer l'email de vérification ───────────────────────
+            echo ""
+            echo "── 4. Envoi de l'email de vérification ──"
+            php artisan tinker --execute="
+              \$admin = App\Models\User::where('type','superadmin')->first();
+              \$user  = App\Models\User::where('email','$TEST_EMAIL')->first();
+              if (!\$user) { echo 'ERREUR: utilisateur introuvable'; exit(1); }
+              SetConfigEmail(\$admin->id);
+              \$user->sendEmailVerificationNotification();
+              echo 'Email de vérification envoyé à $TEST_EMAIL' . PHP_EOL;
+            " 2>&1
+
+            # ── 5. Attendre la livraison Postfix ──────────────────────────
+            echo ""
+            echo "── 5. Attente livraison (5s)... ──"
+            sleep 5
+
+            # ── 6. Vérifier les logs Postfix ─────────────────────────────
+            echo ""
+            echo "── 6. Log Postfix (30 dernières lignes) ──"
+            tail -30 /var/log/mail.log 2>/dev/null || \
+            journalctl -u postfix --no-pager -n 30 2>/dev/null || \
+            echo "(log indisponible)"
+
+            # ── 7. Vérifier la file d'attente ─────────────────────────────
+            echo ""
+            echo "── 7. File d'attente Postfix ──"
+            mailq 2>/dev/null | head -10 || echo "(queue vide)"
+
+            # ── 8. Vérifier l'état du compte créé ─────────────────────────
+            echo ""
+            echo "── 8. État du compte créé ──"
+            php artisan tinker --execute="
+              \$user = App\Models\User::where('email','$TEST_EMAIL')->first();
+              if (!\$user) { echo 'Compte introuvable'; exit; }
+              echo 'Nom          : ' . \$user->name . PHP_EOL;
+              echo 'Email        . : ' . \$user->email . PHP_EOL;
+              echo 'Type         : ' . \$user->type . PHP_EOL;
+              echo 'Langue       : ' . \$user->lang . PHP_EOL;
+              echo 'Rôle         : ' . \$user->getRoleNames()->first() . PHP_EOL;
+              echo 'Email vérifié: ' . (\$user->email_verified_at ? 'NON (en attente)' : 'non') . PHP_EOL;
+            " 2>&1
+
+            echo ""
+            echo "════════════════════════════════════════"
+            echo "  TEST TERMINÉ"
+            echo "  → Vérifie ta boîte Gmail ($TEST_EMAIL)"
+            echo "  → Clique le lien de vérification"
+            echo "  → Tu devrais accéder au dashboard"
+            echo "════════════════════════════════════════"
