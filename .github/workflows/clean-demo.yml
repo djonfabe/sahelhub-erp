@@ -1,0 +1,39 @@
+name: Clean Demo Data
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Supprimer les données demo via VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            cd /var/www/sahelhub
+
+            echo "==> Etat avant nettoyage"
+            php artisan tinker --execute="
+              echo 'Utilisateurs : ' . DB::table('users')->count() . PHP_EOL;
+              echo 'Clients      : ' . (Schema::hasTable('customers') ? DB::table('customers')->count() : 'n/a') . PHP_EOL;
+              echo 'Factures     : ' . (Schema::hasTable('sales_invoices') ? DB::table('sales_invoices')->count() : 'n/a') . PHP_EOL;
+              echo 'Employés     : ' . (Schema::hasTable('employees') ? DB::table('employees')->count() : 'n/a') . PHP_EOL;
+            " 2>&1
+
+            echo ""
+            echo "==> Lancement de app:clean-demo..."
+            php artisan app:clean-demo --force
+
+            echo ""
+            echo "==> Etat après nettoyage"
+            php artisan tinker --execute="
+              echo 'Utilisateurs restants : ' . DB::table('users')->count() . PHP_EOL;
+              echo 'Type superadmin       : ' . DB::table('users')->where('type','superadmin')->count() . PHP_EOL;
+              echo 'Clients               : ' . (Schema::hasTable('customers') ? DB::table('customers')->count() : 'n/a') . PHP_EOL;
+              echo 'Factures              : ' . (Schema::hasTable('sales_invoices') ? DB::table('sales_invoices')->count() : 'n/a') . PHP_EOL;
+              echo 'Employés              : ' . (Schema::hasTable('employees') ? DB::table('employees')->count() : 'n/a') . PHP_EOL;
+            " 2>&1
