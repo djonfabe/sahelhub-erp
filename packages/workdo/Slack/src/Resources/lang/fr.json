@@ -1,15 +1,15 @@
 {
     "Save Changes": "Enregistrer les modifications",
-    "Slack Settings": "Paramètres de Slack",
-    "Slack Webhook URL": "Nom de l' URL",
+    "Slack Settings": "Paramètres Slack",
+    "Slack Webhook URL": "URL du Webhook Slack",
     "Permission denied": "Permission refusée",
-    "Saving...": "Je sauve...",
-    "Enable Slack Integration": "Activer l'intégration avec Slack",
+    "Saving...": "Enregistrement...",
+    "Enable Slack Integration": "Activer l'intégration Slack",
     "Validation failed": "Validation échouée",
     "Notification Settings": "Paramètres de notification",
-    "Allow notifications to be sent to Slack": "Autoriser l'envoi de notifications à Slack",
-    "Configure Slack integration and webhook settings": "Configurer les paramètres d'intégration et de webhook de Slack",
-    "Enter Slack webhook URL": "Entrez l'adresse de connexion à Slack",
-    "Failed to update slack settings: ": "Défaut de mise à jour des paramètres de la marge:",
-    "Slack settings save successfully.": "Slack a été sauvegardé avec succès."
+    "Allow notifications to be sent to Slack": "Autoriser l'envoi de notifications vers Slack",
+    "Configure Slack integration and webhook settings": "Configurer l'intégration Slack et les paramètres de webhook",
+    "Enter Slack webhook URL": "Entrez l'URL du webhook Slack",
+    "Failed to update slack settings: ": "Échec de la mise à jour des paramètres Slack : ",
+    "Slack settings save successfully.": "Paramètres Slack enregistrés avec succès."
 }
